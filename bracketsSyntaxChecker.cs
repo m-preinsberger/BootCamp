@@ -7,11 +7,12 @@ namespace BracketSyntaxChecker
     {
         static void Main(string[] args)
         {
-            string input = "({[]})";
+            string input = "(s{s}s[klkljsdf]sd)";
             bool result = CheckBracketsSyntax(input);
             Console.WriteLine(result);
         }
 
+        // Check if the brackets in the input string are balanced
         private static bool CheckBracketsSyntax(string input)
         {
             Stack<char> stack = new Stack<char>();
@@ -23,8 +24,9 @@ namespace BracketSyntaxChecker
                     case '(':
                     case '[':
                     case '{':
-                        stack.Push(c);
+                        stack.Push(c); // Push opening brackets
                         break;
+
                     case ')':
                         if (stack.Count == 0 || stack.Pop() != '(') return false;
                         break;
@@ -34,12 +36,13 @@ namespace BracketSyntaxChecker
                     case '}':
                         if (stack.Count == 0 || stack.Pop() != '{') return false;
                         break;
+
                     default:
-                        break;
+                        break; // Ignore other characters
                 }
             }
 
-            return stack.Count == 0;
+            return stack.Count == 0; // Return true if all brackets match
         }
     }
 }
